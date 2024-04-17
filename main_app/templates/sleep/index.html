@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>My Sleep Log</h1>
+
+{% for sleep in sleeps %}
+<div class="card">
+    <a href="{% url 'sleep_detail' sleep.id %}">
+      <div class="card-content">
+        <span class="card-title">{{ sleep.date }}</span>
+        <p><b>Bed-Time: </b>{{ sleep.bedtime }}</p>
+        <p><b>Awake-Time: </b>{{ sleep.awake }}</p>
+        <p><b>Wake-Up Mood: </b>{{ sleep.mood }}</p>
+        <p><b>Notes: </b>{{ sleep.note|linebreaks }}</p>
+      </div>
+    </a>
+  </div>
+  {% endfor %}
+  
+{% endblock %}
