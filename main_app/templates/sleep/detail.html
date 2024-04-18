@@ -10,6 +10,10 @@
         <p><b>Wake-Up Mood: </b>{{ sleep.mood }}</p>
         <p><b>Notes: </b>{{ sleep.note|linebreaks }}</p>
       </div>
+      <div class="card-action">
+        <a href="{% url 'sleep_update' sleep.id %}">Edit</a>
+        <a href="{% url 'sleep_delete' sleep.id %}">Delete</a>
+      </div>
   </div>
 
 {% endblock %}
