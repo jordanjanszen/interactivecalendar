@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.views.generic.edit import CreateView
 
 # Import MODELS
 from .models import Activity, Sleep
@@ -28,6 +29,10 @@ def activities_detail(request, activity_id):
       'activity': activity
    })
 
+class ActivityCreate(CreateView):
+   model = Activity
+   fields = '__all__'
+
 
 def sleep_index(request):
   sleeps = Sleep.objects.all()
@@ -40,6 +45,11 @@ def sleep_detail(request, sleep_id):
    return render(request, 'sleep/detail.html', {
       'sleep': sleep
    })
+
+class SleepCreate(CreateView):
+   model = Sleep
+   fields = '__all__'
+
 
 def dashboard_index(request):
   return render(request, 'dashboard/index.html')
