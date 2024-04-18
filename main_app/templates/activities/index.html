@@ -11,33 +11,33 @@
             <p><b>Description: </b>{{ activity.description|linebreaks }}</p>
             <p><b>Date: </b>{{ activity.date }}</p>
             {% if activity.type == 'Run' %}
-                <p><b>Time: </b>{{ activity.time }}</p>
+                <p><b>Duration: </b>{{ activity.time }}</p>
                 <p><b>Distance: </b>{{ activity.distance }}m</p>
                 <p><b>Total Elevation Gain: </b>{{ activity.elevationgain }}</p>
-                <p><b>Calories: </b>{{ activity.calories }}cal</p>
+                <p><b>Calories burned: </b>{{ activity.calories }}cal</p>
             {% elif activity.type == 'Ride' %}
-                <p><b>Time: </b>{{ activity.time }}</p>
+                <p><b>Duration: </b>{{ activity.time }}</p>
                 <p><b>Distance: </b>{{ activity.distance }}m</p>
                 <p><b>Total Elevation Gain: </b>{{ activity.elevationgain }}m</p>
-                <p><b>Calories: </b>{{ activity.calories }}cal</p>
+                <p><b>Calories burned: </b>{{ activity.calories }}cal</p>
             {% elif activity.type == 'Swim' %}
-                <p><b>Time: </b>{{ activity.time }}</p>
+                <p><b>Duration: </b>{{ activity.time }}</p>
                 <p><b>Distance: </b>{{ activity.distance }}m</p>
-                <p><b>Calories: </b>{{ activity.calories }}cal</p>
+                <p><b>Calories burned: </b>{{ activity.calories }}cal</p>
             {% elif activity.type == 'Walk' %}
-                <p><b>Time: </b>{{ activity.time }}</p>
+                <p><b>Duration: </b>{{ activity.time }}</p>
                 <p><b>Distance: </b>{{ activity.distance }}m</p>
                 <p><b>Total Elevation Gain: </b>{{ activity.elevationgain }}</p>
-                <p>Calories: {{ activity.calories }}cal</p>
+                <p>Calories burned: {{ activity.calories }}cal</p>
             {% elif activity.type == 'Gym' %}
-                <p><b>Time: </b>{{ activity.time }}</p>
-                <p><b>Calories: </b>{{ activity.calories }}cal</p>
+                <p><b>Duration: </b>{{ activity.time }}</p>
+                <p><b>Calories burned: </b>{{ activity.calories }}cal</p>
             {% elif activity.type == 'Yoga' %}
-                <p><b>Time: </b>{{ activity.time }}</p>
-                <p><b>Calories: </b>{{ activity.calories }}cal</p>
+                <p><b>Duration: </b>{{ activity.time }}</p>
+                <p><b>Calories burned: </b>{{ activity.calories }}cal</p>
             {% elif activity.type == 'Other' %}
-                <p><b>Time: </b>{{ activity.time }}</p>
-                <p><b>Calories: </b>{{ activity.calories }}cal</p>
+                <p><b>Duration: </b>{{ activity.time }}</p>
+                <p><b>Calories burned: </b>{{ activity.calories }}cal</p>
             {% endif %}
         </div>
     </a>

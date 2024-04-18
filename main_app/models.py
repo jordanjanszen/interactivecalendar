@@ -5,12 +5,12 @@ from django.urls import reverse
 class Activity(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(max_length=250)
-    date = models.DateTimeField()
+    date = models.DateField('Date (yyyy/mm/dd)')
     type = models.CharField(max_length=25)
-    time = models.DurationField()
-    distance = models.IntegerField()
-    elevationgain = models.IntegerField()
-    calories = models.IntegerField()
+    time = models.DurationField('Activity Duration (hh:mm:ss)')
+    distance = models.IntegerField('Distance (m)')
+    elevationgain = models.IntegerField('Elevation Gain (m)')
+    calories = models.IntegerField('Calories Burned')
 
     def __str__(self):
         return self.name
@@ -21,9 +21,17 @@ class Activity(models.Model):
     class Meta:
         ordering = ['-date']
 
+class Nutrition(models.Model):
+    name = models.CharField(max_length=75, default='N/A')
+    fat = models.IntegerField('Fat (g)')
+    protein = models.IntegerField('Protein (g)')
+    carbohydrates = models.IntegerField('Carbohydrates (g)')
+    totalcalories = models.IntegerField('Total Calories Consumed')
+
+    activity = models.ForeignKey(Activity, on_delete=models.CASCADE)
 
 class Sleep(models.Model):
-    date = models.DateField()
+    date = models.DateField('Date (yyyy/mm/dd)')
     bedtime = models.TimeField()
     awake = models.TimeField()
     mood = models.CharField(max_length=25)

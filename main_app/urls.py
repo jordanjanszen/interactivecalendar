@@ -10,6 +10,7 @@ urlpatterns = [
     path('activities/create/', views.ActivityCreate.as_view(), name='activities_create'),
     path('activities/<int:pk>/update/', views.ActivityUpdate.as_view(), name='activities_update'),
     path('activities/<int:pk>/delete/', views.ActivityDelete.as_view(), name='activities_delete'),
+    path('activities/<int:activity_id>/add_nutrition/', views.add_nutrition, name='add_nutrition'),
     path('sleep/', views.sleep_index, name='sleep_index'),
     path('sleep/<int:sleep_id>/', views.sleep_detail, name='sleep_detail'),
     path('sleep/create/', views.SleepCreate.as_view(), name='sleep_create'),

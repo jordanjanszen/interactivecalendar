@@ -1,5 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+
+# Import FORMS
+from .forms import NutritionForm
 
 # Import MODELS
 from .models import Activity, Sleep
@@ -25,8 +28,10 @@ def activities_index(request):
 
 def activities_detail(request, activity_id):
    activity = Activity.objects.get(id=activity_id)
+   nutrition_form = NutritionForm()
    return render(request, 'activities/detail.html', {
-      'activity': activity
+      'activity': activity,
+      'nutrition_form': nutrition_form,
    })
 
 class ActivityCreate(CreateView):
@@ -40,6 +45,15 @@ class ActivityUpdate(UpdateView):
 class ActivityDelete(DeleteView):
   model = Activity
   success_url = '/activities'
+
+def add_nutrition(request, activity_id):
+  form = NutritionForm(request.POST)
+  if form.is_valid():
+    new_nutrition = form.save(commit=False)
+    new_nutrition.activity_id = activity_id
+    new_nutrition.save()
+  return redirect('activities_detail', activity_id=activity_id)
+
 
 def sleep_index(request):
   sleeps = Sleep.objects.all()
