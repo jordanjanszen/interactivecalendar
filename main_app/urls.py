@@ -17,4 +17,5 @@ urlpatterns = [
     path('sleep/<int:pk>/update/', views.SleepUpdate.as_view(), name='sleep_update'),
     path('sleep/<int:pk>/delete/', views.SleepDelete.as_view(), name='sleep_delete'),
     path('dashboard', views.dashboard_index, name='dashboard_index'),
+    path('accounts/signup/', views.signup, name='signup'),
 ]

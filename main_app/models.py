@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Activity(models.Model):
@@ -20,6 +21,8 @@ class Activity(models.Model):
 
     class Meta:
         ordering = ['-date']
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class Nutrition(models.Model):
     name = models.CharField(max_length=75, default='N/A')
@@ -42,3 +45,5 @@ class Sleep(models.Model):
 
     class Meta:
         ordering = ['-date']
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
