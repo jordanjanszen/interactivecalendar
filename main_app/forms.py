@@ -5,5 +5,5 @@ class NutritionForm(ModelForm):
     class Meta:
         model = Nutrition
         fields = '__all__'
-        exclude = ['activity']
+        exclude = ['activity', 'user']
 

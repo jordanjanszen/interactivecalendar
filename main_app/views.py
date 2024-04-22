@@ -55,12 +55,11 @@ def activities_detail(request, activity_id):
 class ActivityCreate(LoginRequiredMixin, CreateView):
     model = Activity
     fields = '__all__'
+    exclude = ['user']
 
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
-
-
 
 class ActivityUpdate(LoginRequiredMixin, UpdateView):
   model = Activity
@@ -96,6 +95,7 @@ def sleep_detail(request, sleep_id):
 class SleepCreate(LoginRequiredMixin, CreateView):
     model = Sleep
     fields = '__all__'
+    exclude = ['user']
 
     def form_valid(self, form):
         form.instance.user = self.request.user

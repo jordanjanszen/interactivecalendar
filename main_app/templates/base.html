@@ -26,7 +26,10 @@
             <li><a href="{% url 'sleep_index' %}">My Sleep</a></li>
             <li><a href="{% url 'sleep_create' %}">Add Sleep</a></li>
             <li><a href="{% url 'dashboard_index' %}">My Dashboard</a></li>
-            <li><a href="{% url 'logout' %}">Log Out</a></li>
+            <li><form method="post" action="{% url 'logout' %}">
+              {% csrf_token %}
+              <button type="submit">Log Out</button>
+          </form></li>
           {% else %}
             <li><a href="{% url 'signup' %}">Sign Up</a></li>
             <li><a href="{% url 'login' %}">Log In</a></li>
