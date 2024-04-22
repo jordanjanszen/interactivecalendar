@@ -13,3 +13,22 @@ footer.page-footer {
     text-align: right;
 }
 
+#month-year {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.calendar {
+    margin-top: 20px;
+}
+
+.days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.day {
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
