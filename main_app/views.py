@@ -37,6 +37,7 @@ def signup(request):
 def calendar_index(request):
   return render(request, 'calendar/index.html')
 
+### This code needs to be fixed to render my sleep and activity data for my modal
 @login_required
 def fetch_data(request):
     if request.method == 'GET':
@@ -50,6 +51,7 @@ def fetch_data(request):
             'activities': activities,
             'sleeps': sleeps,
         })
+
 
 @login_required
 def activities_index(request):
