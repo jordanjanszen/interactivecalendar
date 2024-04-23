@@ -43,7 +43,6 @@ def fetch_data(request):
         selected_date_str = request.GET.get('selected_date')
         selected_date = datetime.strptime(selected_date_str, '%Y-%m-%d').date()
         
-        # Fetch activity and sleep data for the selected date
         activities = Activity.objects.filter(date=selected_date, user=request.user)
         sleeps = Sleep.objects.filter(date=selected_date, user=request.user)
         

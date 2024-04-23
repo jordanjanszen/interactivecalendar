@@ -52,7 +52,6 @@
     font-weight: bold;
   }
 
-  /* Navigation buttons */
   .nav-buttons {
     display: flex;
     justify-content: space-between;
@@ -92,7 +91,6 @@
           <div class="card-content">
             <span class="card-title" id="month-year"></span>
 
-            <!-- Navigation buttons -->
             <div class="row nav-buttons">
               <div class="col s6">
                 <button
@@ -112,7 +110,6 @@
               </div>
             </div>
 
-            <!-- Day titles row -->
             <div class="day-titles">
               <div class="day-title-item">Sun</div>
               <div class="day-title-item">Mon</div>
@@ -123,7 +120,6 @@
               <div class="day-title-item">Sat</div>
             </div>
 
-            <!-- Calendar grid -->
             <div class="calendar">
               <div class="row">
                 <div class="col s12">
@@ -139,39 +135,40 @@
     </div>
   </div>
 
-  <!-- Add Data Modal -->
-  <div id="addDataModal" class="modal">
-    <div class="modal-content">
-    {% for activity in activities %}
-      <p>{{ activity.name }}</p>
-    <!-- Add more activity fields as needed -->
-    {% empty %}
-      <p>No activities for selected date</p>
-    {% endfor %}
+<!-- Add Data Modal -->
+<div id="addDataModal" class="modal">
+  <div class="modal-content">
+      {% for activity in activities %}
+          <p>{{ activity.name }}</p>
 
-    {% for sleep in sleeps %}
-      <p>Bedtime: {{ sleep.bedtime }}</p>
-      <p>Awake: {{ sleep.awake }}</p>
-    <!-- Add more sleep fields as needed -->
-    {% empty %}
-    <p>No sleep data for selected date</p>
-    {% endfor %}
-      <h4>Add Data</h4>
+      {% empty %}
+          <p>No activities for selected date</p>
+      {% endfor %}
+
+      {% for sleep in sleeps %}
+          <p>Bedtime: {{ sleep.bedtime }}</p>
+          <p>Awake: {{ sleep.awake }}</p>
+
+      {% empty %}
+          <p>No sleep data for selected date</p>
+      {% endfor %}
+
+      <h4>Add Sleep or Activity Data</h4>
       <p>What would you like to add?</p>
       <div class="row">
-        <div class="col s6">
-          <button class="btn waves-effect waves-light" id="addSleepBtn">
-            Add Sleep
-          </button>
-        </div>
-        <div class="col s6">
-          <button class="btn waves-effect waves-light" id="addActivityBtn">
-            Add Activity
-          </button>
-        </div>
+          <div class="col s6">
+              <button class="btn waves-effect waves-light" id="addSleepBtn">
+                  Add Sleep
+              </button>
+          </div>
+          <div class="col s6">
+              <button class="btn waves-effect waves-light" id="addActivityBtn">
+                  Add Activity
+              </button>
+          </div>
       </div>
-    </div>
   </div>
+</div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <script>
@@ -194,73 +191,57 @@
         const addDataModal = document.getElementById("addDataModal");
         dataModal = M.Modal.init(addDataModal);
   
-        // Add event listener to open the modal when a day is clicked
         const dayElements = document.querySelectorAll(".day");
         dayElements.forEach((day) => {
           day.addEventListener("click", function () {
-            // Open the modal for adding data
             dataModal.open();
           });
         });
   
-        // Event listener for adding sleep button
         const addSleepBtn = document.getElementById("addSleepBtn");
         addSleepBtn.addEventListener("click", function () {
-          // Close the modal
           dataModal.close();
-          // Redirect to add sleep page or trigger any other action
           window.location.href = "/sleep/create";
         });
   
-        // Event listener for adding activity button
         const addActivityBtn = document.getElementById("addActivityBtn");
         addActivityBtn.addEventListener("click", function () {
-          // Close the modal
           dataModal.close();
-          // Redirect to add activity page or trigger any other action
           window.location.href = "/activities/create";
         });
       }
   
-      // Function to render calendar for the given month and year
       function renderCalendar(month, year) {
         // Clear previous calendar
         daysContainer.innerHTML = "";
   
-        // Set month and year in header
         monthYearText.textContent = `${getMonthName(month)} ${year}`;
   
-        // Get the first day of the month
         const firstDayOfMonth = new Date(year, month, 1);
-        const startDayOfWeek = firstDayOfMonth.getDay(); // 0 for Sunday, 1 for Monday, etc.
+        const startDayOfWeek = firstDayOfMonth.getDay(); // 0 for Sunday, 1 for Monday
   
-        // Get the number of days in the month
         const numDaysInMonth = new Date(year, month + 1, 0).getDate();
   
-        // Fill in the days of the previous month if necessary
         for (let i = 0; i < startDayOfWeek; i++) {
           const prevMonthDay = numDaysInMonth - startDayOfWeek + i + 1;
           const dayElement = createDayElement(prevMonthDay, "other-month");
           daysContainer.appendChild(dayElement);
         }
   
-        // Fill in the days of the current month
         for (let day = 1; day <= numDaysInMonth; day++) {
           const className =
             day === today.getDate() &&
             month === today.getMonth() &&
             year === today.getFullYear()
               ? "current-day"
-              : "current-month"; // Check if the day is the current day
+              : "current-month"; 
           const dayElement = createDayElement(day, className);
           daysContainer.appendChild(dayElement);
         }
   
-        // Reinitialize the modal and its event listeners
         initializeModal();
       }
   
-      // Function to create a day element
       function createDayElement(day, className) {
         const dayElement = document.createElement("div");
         dayElement.textContent = day;
@@ -268,7 +249,6 @@
         return dayElement;
       }
   
-      // Function to get the name of the month
       function getMonthName(month) {
         const monthNames = [
           "January",
@@ -287,10 +267,8 @@
         return monthNames[month];
       }
   
-      // Initial render of the calendar
       renderCalendar(currentMonth, currentYear);
   
-      // Event listeners for navigating to previous and next months
       prevMonthBtn.addEventListener("click", function () {
         currentMonth--;
         if (currentMonth < 0) {
