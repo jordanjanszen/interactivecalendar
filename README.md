@@ -4,7 +4,7 @@ Interactive Calendar is a web application built with Django that helps users tra
 
 ## Features
 
-- **User Authentication**: Users can sign up for an account and log in securely to access their personalized fitness dashboard.
+- **User Authentication**: Users can sign up for an account and log in securely to access their personalized calendar.
   
 - **Activity Tracking**: Users can log their daily activities, including workouts, by providing details such as activity type, duration, distance, and calories burned.
 
