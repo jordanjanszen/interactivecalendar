@@ -142,6 +142,20 @@
   <!-- Add Data Modal -->
   <div id="addDataModal" class="modal">
     <div class="modal-content">
+    {% for activity in activities %}
+      <p>{{ activity.name }}</p>
+    <!-- Add more activity fields as needed -->
+    {% empty %}
+      <p>No activities for selected date</p>
+    {% endfor %}
+
+    {% for sleep in sleeps %}
+      <p>Bedtime: {{ sleep.bedtime }}</p>
+      <p>Awake: {{ sleep.awake }}</p>
+    <!-- Add more sleep fields as needed -->
+    {% empty %}
+    <p>No sleep data for selected date</p>
+    {% endfor %}
       <h4>Add Data</h4>
       <p>What would you like to add?</p>
       <div class="row">

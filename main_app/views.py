@@ -10,6 +10,8 @@ from .forms import NutritionForm
 
 # Import MODELS
 from .models import Activity, Sleep
+from datetime import datetime
+
 
 # Create your views here.
 def home(request):
@@ -35,6 +37,20 @@ def signup(request):
 def calendar_index(request):
   return render(request, 'calendar/index.html')
 
+@login_required
+def fetch_data(request):
+    if request.method == 'GET':
+        selected_date_str = request.GET.get('selected_date')
+        selected_date = datetime.strptime(selected_date_str, '%Y-%m-%d').date()
+        
+        # Fetch activity and sleep data for the selected date
+        activities = Activity.objects.filter(date=selected_date, user=request.user)
+        sleeps = Sleep.objects.filter(date=selected_date, user=request.user)
+        
+        return render(request, 'fetch_data.html', {
+            'activities': activities,
+            'sleeps': sleeps,
+        })
 
 @login_required
 def activities_index(request):
@@ -54,7 +70,7 @@ def activities_detail(request, activity_id):
 
 class ActivityCreate(LoginRequiredMixin, CreateView):
     model = Activity
-    fields = '__all__'
+    fields = ['name', 'description', 'date', 'type', 'time', 'distance', 'elevationgain', 'calories']
     exclude = ['user']
 
     def form_valid(self, form):
@@ -63,7 +79,7 @@ class ActivityCreate(LoginRequiredMixin, CreateView):
 
 class ActivityUpdate(LoginRequiredMixin, UpdateView):
   model = Activity
-  fields = '__all__'
+  fields = ['name', 'description', 'date', 'type', 'time', 'distance', 'elevationgain', 'calories']
 
 class ActivityDelete(LoginRequiredMixin, DeleteView):
   model = Activity
@@ -94,7 +110,7 @@ def sleep_detail(request, sleep_id):
 
 class SleepCreate(LoginRequiredMixin, CreateView):
     model = Sleep
-    fields = '__all__'
+    fields = ['date', 'bedtime', 'awake', 'mood', 'note']
     exclude = ['user']
 
     def form_valid(self, form):
@@ -103,7 +119,7 @@ class SleepCreate(LoginRequiredMixin, CreateView):
 
 class SleepUpdate(LoginRequiredMixin, UpdateView):
   model = Sleep
-  fields = '__all__'
+  fields = ['date', 'bedtime', 'awake', 'mood', 'note']
 
 class SleepDelete(LoginRequiredMixin, DeleteView):
   model = Sleep
@@ -112,3 +128,4 @@ class SleepDelete(LoginRequiredMixin, DeleteView):
 @login_required
 def dashboard_index(request):
   return render(request, 'dashboard/index.html')
+

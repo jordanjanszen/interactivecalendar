@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 class Activity(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(max_length=250)
-    date = models.DateField('Date (yyyy/mm/dd)')
+    date = models.DateField('Date (yyyy-mm-dd)')
     type = models.CharField(max_length=25)
     time = models.DurationField('Activity Duration (hh:mm:ss)')
     distance = models.IntegerField('Distance (m)')
@@ -34,7 +34,7 @@ class Nutrition(models.Model):
     activity = models.ForeignKey(Activity, on_delete=models.CASCADE)
 
 class Sleep(models.Model):
-    date = models.DateField('Date (yyyy/mm/dd)')
+    date = models.DateField('Date (yyyy-mm-dd)')
     bedtime = models.TimeField()
     awake = models.TimeField()
     mood = models.CharField(max_length=25)
