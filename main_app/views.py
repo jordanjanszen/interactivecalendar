@@ -47,7 +47,7 @@ def fetch_data(request):
         activities = Activity.objects.filter(date=selected_date, user=request.user)
         sleeps = Sleep.objects.filter(date=selected_date, user=request.user)
         
-        return render(request, 'fetch_data.html', {
+        return render(request, 'calendar/index.html', {
             'activities': activities,
             'sleeps': sleeps,
         })
